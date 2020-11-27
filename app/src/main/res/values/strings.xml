@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">github</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_detail">Detail</string>
+
+    <string name="generic_int">%d</string>
+    <string name="generic_string">%s</string>
+    <string name="generic_number">%.2f</string>
+</resources>

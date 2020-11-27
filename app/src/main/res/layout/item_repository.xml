@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.TextUtils" />
+
+        <import type="android.view.View" />
+
+        <import type="java.util.Locale" />
+
+        <variable
+            name="model"
+            type="com.batdemir.github.data.entities.RepositoryModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/root_item_repository"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?android:selectableItemBackground"
+        app:cardCornerRadius="0sp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="@dimen/root_padding">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_edit_repository_name"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:text="@{model.name}"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+                app:fontFamily="@font/roboto_black"
+                app:layout_constraintBottom_toTopOf="@id/table_layout"
+                app:layout_constraintEnd_toStartOf="@id/image_favorite"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TableLayout
+                android:id="@+id/table_layout"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*"
+                app:layout_constraintBottom_toTopOf="@id/text_view_edit_last_update_date"
+                app:layout_constraintEnd_toStartOf="@id/image_favorite"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_edit_repository_name">
+
+                <TableRow tools:ignore="UselessParent">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_view_edit_language"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{model.language}"
+                        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                        android:visibility="@{model.language == null ? View.GONE: View.VISIBLE}" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_view_edit_license"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_license"
+                        android:drawablePadding="@dimen/padding_small"
+                        android:text="@{model.license.name}"
+                        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                        android:visibility="@{model.license == null ?  View.GONE : View.VISIBLE}" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_view_edit_fork_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_fork"
+                        android:drawablePadding="@dimen/padding_small"
+                        android:text="@{String.format(Locale.ROOT, @string/generic_int,model.forksCount)}"
+                        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_view_edit_start_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_star"
+                        android:drawablePadding="@dimen/padding_small"
+                        android:text="@{String.format(Locale.ROOT, @string/generic_int,model.forksCount)}"
+                        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/text_view_edit_issue_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_issue"
+                        android:drawablePadding="@dimen/padding_small"
+                        android:text="@{String.format(Locale.ROOT, @string/generic_int,model.forksCount)}"
+                        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small" />
+                </TableRow>
+            </TableLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_edit_last_update_date"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:inputType="datetime"
+                android:text="@{model.updatedDate}"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:visibility="@{model.updatedAt == null ? View.GONE: View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/image_favorite"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/table_layout" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image_favorite"
+                android:layout_width="24sp"
+                android:layout_height="24sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/table_layout"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
