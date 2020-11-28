@@ -34,22 +34,39 @@
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
                 android:text="@{model.name}"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
                 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
                 app:fontFamily="@font/roboto_black"
-                app:layout_constraintBottom_toTopOf="@id/table_layout"
+                android:textColor="@color/primaryColor"
+                app:layout_constraintBottom_toTopOf="@id/text_view_edit_description"
                 app:layout_constraintEnd_toStartOf="@id/image_favorite"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_edit_description"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
+                android:text="@{model.description}"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+                android:visibility="@{model.description == null ? View.GONE: View.VISIBLE}"
+                app:layout_constraintBottom_toTopOf="@id/table_layout"
+                app:layout_constraintEnd_toStartOf="@id/image_favorite"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_edit_repository_name" />
 
             <TableLayout
                 android:id="@+id/table_layout"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
                 android:stretchColumns="*"
-                app:layout_constraintBottom_toTopOf="@id/text_view_edit_last_update_date"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/image_favorite"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_edit_repository_name">
+                app:layout_constraintTop_toBottomOf="@id/text_view_edit_description">
 
                 <TableRow tools:ignore="UselessParent">
 
@@ -86,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_star"
                         android:drawablePadding="@dimen/padding_small"
-                        android:text="@{String.format(Locale.ROOT, @string/generic_int,model.forksCount)}"
+                        android:text="@{String.format(Locale.ROOT, @string/generic_int,model.stargazersCount)}"
                         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small" />
 
                     <com.google.android.material.textview.MaterialTextView
@@ -95,24 +112,10 @@
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_issue"
                         android:drawablePadding="@dimen/padding_small"
-                        android:text="@{String.format(Locale.ROOT, @string/generic_int,model.forksCount)}"
+                        android:text="@{String.format(Locale.ROOT, @string/generic_int,model.openIssuesCount)}"
                         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small" />
                 </TableRow>
             </TableLayout>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text_view_edit_last_update_date"
-                android:layout_width="0sp"
-                android:layout_height="wrap_content"
-                android:inputType="datetime"
-                android:text="@{model.updatedDate}"
-                android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-                android:visibility="@{model.updatedAt == null ? View.GONE: View.VISIBLE}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/image_favorite"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/table_layout" />
-
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image_favorite"
                 android:layout_width="24sp"

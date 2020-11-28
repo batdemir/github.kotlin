@@ -15,6 +15,5 @@
         <!-- Customize your theme here. -->
         <item name="fontFamily">@font/roboto</item>
         <item name="textAllCaps">false</item>
-        <item name="android:windowLightStatusBar">true</item>
     </style>
 </resources>

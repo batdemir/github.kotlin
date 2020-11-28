@@ -1,7 +1,10 @@
 package com.batdemir.github.ui
 
+import android.os.Bundle
+import android.view.ViewGroup
+
 interface BaseFragmentActions {
-    fun setupDefinition();
-    fun setupData();
-    fun setupListener();
+    fun setupDefinition(parent: ViewGroup?, savedInstanceState: Bundle?)
+    fun setupData()
+    fun setupListener()
 }

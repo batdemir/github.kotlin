@@ -16,11 +16,33 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right">
+            <argument
+                android:name="title"
+                android:defaultValue=""
+                app:argType="string"
+                app:nullable="false" />
+            <argument
+                android:name="model"
+                android:defaultValue="@null"
+                app:argType="com.batdemir.github.data.entities.RepositoryModel"
+                app:nullable="true" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.batdemir.github.ui.detail.DetailFragment"
-        android:label="@string/title_detail"
-        tools:layout="@layout/fragment_detail" />
+        android:label="{title}"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="title"
+            android:defaultValue=""
+            app:argType="string"
+            app:nullable="false" />
+        <argument
+            android:name="model"
+            android:defaultValue="@null"
+            app:argType="com.batdemir.github.data.entities.RepositoryModel"
+            app:nullable="true" />
+    </fragment>
 </navigation>

@@ -1,7 +1,6 @@
 package com.batdemir.github.di.component
 
 import android.content.Context
-import com.batdemir.github.di.module.LocalModule
 import com.batdemir.github.di.module.NetworkModule
 import com.batdemir.github.di.module.RepositoryModule
 import com.batdemir.github.di.module.StorageModule
@@ -13,7 +12,6 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        LocalModule::class,
         NetworkModule::class,
         RepositoryModule::class,
         StorageModule::class

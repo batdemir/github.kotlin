@@ -5,56 +5,26 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class OwnerModel(
-    var login: String? = null,
-    @SerializedName("node_id")
-    var nodeId: String? = null,
+    val id: Long? = null,
+    val login: String? = null,
     @SerializedName("avatar_url")
-    var avatarUrl: String? = null,
-    var url: String? = null,
+    val avatarUrl: String? = null,
     @SerializedName("html_url")
-    var htmlUrl: String? = null,
-    @SerializedName("followers_url")
-    var followersUrl: String? = null,
-    @SerializedName("subscriptions_url")
-    var subscriptionsUrl: String? = null,
-    @SerializedName("organizations_url")
-    var organizationsUrl: String? = null,
-    @SerializedName("repos_url")
-    var reposUrl: String? = null,
-    @SerializedName("received_events_url")
-    var receivedEventsUrl: String? = null,
-    var type: String? = null,
-    @SerializedName("site_admin")
-    var siteAdmin: String? = null,
+    val htmlUrl: String? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
+        parcel.readValue(Long::class.java.classLoader) as? Long,
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
-    )
+    ) {
+    }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeValue(id)
         parcel.writeString(login)
-        parcel.writeString(nodeId)
         parcel.writeString(avatarUrl)
-        parcel.writeString(url)
         parcel.writeString(htmlUrl)
-        parcel.writeString(followersUrl)
-        parcel.writeString(subscriptionsUrl)
-        parcel.writeString(organizationsUrl)
-        parcel.writeString(reposUrl)
-        parcel.writeString(receivedEventsUrl)
-        parcel.writeString(type)
-        parcel.writeString(siteAdmin)
     }
 
     override fun describeContents(): Int {

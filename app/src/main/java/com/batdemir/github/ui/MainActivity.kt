@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         val controller = binding.bottomNavigationView.setupWithNavController(
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
-            containerId = binding.navigationHostFragment.id,
+            containerId = R.id.navigation_host_fragment,
             intent = intent
         )
 

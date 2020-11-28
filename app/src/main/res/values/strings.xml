@@ -7,4 +7,15 @@
     <string name="generic_int">%d</string>
     <string name="generic_string">%s</string>
     <string name="generic_number">%.2f</string>
+
+    <string name="repository_full_name">Repository Full Name: %s</string>
+    <string name="description">Description: %s</string>
+    <string name="language">Language: %s</string>
+    <string name="license">License: %s</string>
+    <string name="fork_count">Forks: %d</string>
+    <string name="star_count">Stars: %d</string>
+    <string name="issue_count">Issues: %d</string>
+    <string name="created_at">Created At: %s</string>
+    <string name="updated_at">Updated At: %s</string>
+    <string name="pushed_at">Pushed At: %s</string>
 </resources>
