@@ -9,6 +9,21 @@ A Github Application simple app that loads information from Github API to show o
  - Retrofit
  - Room
  - Navigation
+
+ ## Screens
+ <div>
+   <img src="/screens/light_1.png" width="20%"/>
+   <img src="/screens/light_2.png" width="20%"/>
+   <img src="/screens/light_3.jpg" width="20%"/>
+ </div>
+
+ ## Screens (Dark Mode)
+  <div>
+    <img src="/screens/dark_1.png" width="20%"/>
+    <img src="/screens/dark_2.png" width="20%"/>
+    <img src="/screens/dark_3.jpg" width="20%"/>
+  </div>
+
 ## App Architecture
  - [Guide to app architecture](https://developer.android.com/jetpack/guide)
 ### Glide
