@@ -82,4 +82,19 @@ dependencies {
 
     // debugging
     implementation "com.jakewharton.timber:timber:$versions.timberVersion"
+
+    // test
+    androidTestImplementation "androidx.arch.core:core-testing:$versions.archVersion"
+    androidTestImplementation "androidx.test:core:$versions.testCoreVersion"
+    androidTestImplementation "androidx.test:runner:$versions.jUnitVersion"
+    androidTestImplementation "androidx.test:rules:$versions.jUnitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$versions.textExtVersion"
+    androidTestImplementation "androidx.test.ext:truth:$versions.textExtVersion"
+    androidTestImplementation "com.google.truth:truth:$versions.truthVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$versions.espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$versions.espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-accessibility:$versions.espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-web:$versions.espressoVersion"
+    androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:$versions.espressoVersion"
 }
