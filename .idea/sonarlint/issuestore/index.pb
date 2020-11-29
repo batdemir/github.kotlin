@@ -67,3 +67,12 @@ v
 Fapp/src/main/java/com/batdemir/github/data/entities/RepositoryModel.kt,4/1/41553cf0d8b8614fd02ec6baf4813dceac6d004e
 p
 @app/src/main/java/com/batdemir/github/utils/KeyboardExtension.kt,c/a/caa05719f21b3c0a28cb5c70ea0e3d94a1f3889a
+A
+gradle.properties,2/a/2afbb999f001938c88fa43fc2ef52abf0f8213e4
+:
+
+.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
+y
+Iapp/src/androidTest/java/com/batdemir/github/test/GithubRepositoryTest.kt,6/9/699baec5380434c23049f57c4aba89f7202b6a82
+s
+Capp/src/test/java/com/batdemir/github/data/source/FakeDataSource.kt,c/e/ce454a89bf00414120f4228a18ac07a991314e5e

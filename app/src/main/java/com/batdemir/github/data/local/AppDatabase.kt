@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.batdemir.github.data.entities.RepositoryModel
+import com.batdemir.github.data.local.dao.GithubDao
 
 @Database(
     entities = [

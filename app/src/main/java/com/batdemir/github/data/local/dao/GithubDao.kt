@@ -1,4 +1,4 @@
-package com.batdemir.github.data.local
+package com.batdemir.github.data.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
