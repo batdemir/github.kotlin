@@ -14,7 +14,7 @@ A Github Application simple app that loads information from Github API to show o
  <div>
    <img src="/screens/light_1.png" width="20%"/>
    <img src="/screens/light_2.png" width="20%"/>
-   <img src="/screens/light_3.jpg" width="20%"/>
+   <img src="/screens/light_3.png" width="20%"/>
  </div>
 
  ## Screens (Dark Mode)
