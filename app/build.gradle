@@ -60,6 +60,9 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:$versions.pagingVersion"
     implementation "com.github.bumptech.glide:okhttp3-integration:$versions.glideVersion"
     kapt "com.github.bumptech.glide:compiler:$versions.glideVersion"
+    implementation "androidx.room:room-runtime:$versions.roomVersion"
+    implementation "androidx.room:room-ktx:$versions.roomVersion"
+    kapt "androidx.room:room-compiler:$versions.roomVersion"
 
     // startup
     implementation "androidx.startup:startup-runtime:$versions.startupVersion"

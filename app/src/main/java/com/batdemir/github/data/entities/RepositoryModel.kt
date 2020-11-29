@@ -2,37 +2,46 @@ package com.batdemir.github.data.entities
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.batdemir.github.utils.TimeExpressions
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "Repository")
 data class RepositoryModel(
-    val id: Long? = null,
-    val name: String? = null,
-    val owner: OwnerModel? = null,
-    val htmlUrl: String? = null,
-    val description: String? = null,
-    val language: String? = null,
-    val license: LicenseModel? = null,
+    @PrimaryKey
+    @ColumnInfo(name = "repositoryId") var id: Long = 0,
+    @ColumnInfo(name = "repositoryName") var name: String = "",
+    @Embedded
+    var owner: OwnerModel? = null,
+    var htmlUrl: String? = null,
+    var description: String? = null,
+    var language: String? = null,
+    @Embedded
+    var license: LicenseModel? = null,
     @SerializedName("full_name")
-    val fullName: String? = null,
+    var fullName: String? = null,
     @SerializedName("stargazers_count")
-    val stargazersCount: Int,
+    var stargazersCount: Int,
     @SerializedName("open_issues_count")
-    val openIssuesCount: Int,
+    var openIssuesCount: Int,
     @SerializedName("forks_count")
-    val forksCount: Int,
+    var forksCount: Int,
     @SerializedName("created_at")
-    val createdAt: String? = null,
+    var createdAt: String? = null,
     @SerializedName("updated_at")
-    val updatedAt: String? = null,
+    var updatedAt: String? = null,
     @SerializedName("pushed_at")
-    val pushedAt: String? = null,
-    val isFavorite: Boolean = false
+    var pushedAt: String? = null,
+    var isFavorite: Boolean = false,
+    var ownerName: String = "",
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
-        parcel.readValue(Long::class.java.classLoader) as? Long,
-        parcel.readString(),
+        parcel.readLong(),
+        parcel.readString()!!,
         parcel.readParcelable(OwnerModel::class.java.classLoader),
         parcel.readString(),
         parcel.readString(),
@@ -45,9 +54,29 @@ data class RepositoryModel(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readByte() != 0.toByte()
+        parcel.readByte() != 0.toByte(),
+        parcel.readString()!!
     ) {
     }
+
+    constructor() : this(
+        0,
+        "",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        false,
+        ""
+    )
 
     fun getCreated(): String {
         return TimeExpressions.setStringToDate(
@@ -71,7 +100,7 @@ data class RepositoryModel(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeValue(id)
+        parcel.writeLong(id)
         parcel.writeString(name)
         parcel.writeParcelable(owner, flags)
         parcel.writeString(htmlUrl)
@@ -86,25 +115,11 @@ data class RepositoryModel(
         parcel.writeString(updatedAt)
         parcel.writeString(pushedAt)
         parcel.writeByte(if (isFavorite) 1 else 0)
+        parcel.writeString(ownerName)
     }
 
     override fun describeContents(): Int {
         return 0
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as RepositoryModel
-
-        if (id != other.id) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        return id?.hashCode() ?: 0
     }
 
     companion object CREATOR : Parcelable.Creator<RepositoryModel> {
@@ -116,6 +131,5 @@ data class RepositoryModel(
             return arrayOfNulls(size)
         }
     }
-
 
 }

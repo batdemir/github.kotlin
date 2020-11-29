@@ -42,7 +42,8 @@
                 app:layout_constraintBottom_toTopOf="@id/text_view_edit_description"
                 app:layout_constraintEnd_toStartOf="@id/image_favorite"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Batdemir Repository" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_view_edit_description"
@@ -56,7 +57,8 @@
                 app:layout_constraintBottom_toTopOf="@id/table_layout"
                 app:layout_constraintEnd_toStartOf="@id/image_favorite"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_view_edit_repository_name" />
+                app:layout_constraintTop_toBottomOf="@id/text_view_edit_repository_name"
+                tools:text="Batdemir Repository Description" />
 
             <TableLayout
                 android:id="@+id/table_layout"
@@ -76,7 +78,8 @@
                         android:layout_height="wrap_content"
                         android:text="@{model.language}"
                         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
-                        android:visibility="@{model.language == null ? View.GONE: View.VISIBLE}" />
+                        android:visibility="@{model.language == null ? View.GONE: View.VISIBLE}"
+                        tools:text="Kotlin" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/text_view_edit_license"
@@ -86,7 +89,8 @@
                         android:drawablePadding="@dimen/padding_small"
                         android:text="@{model.license.name}"
                         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
-                        android:visibility="@{model.license == null ?  View.GONE : View.VISIBLE}" />
+                        android:visibility="@{model.license == null ?  View.GONE : View.VISIBLE}"
+                        tools:text="Apachi License 2.0" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/text_view_edit_fork_count"
@@ -95,7 +99,8 @@
                         android:drawableStart="@drawable/ic_fork"
                         android:drawablePadding="@dimen/padding_small"
                         android:text="@{String.format(Locale.ROOT, @string/generic_int,model.forksCount)}"
-                        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small" />
+                        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                        tools:text="0" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/text_view_edit_start_count"
@@ -104,7 +109,8 @@
                         android:drawableStart="@drawable/ic_star"
                         android:drawablePadding="@dimen/padding_small"
                         android:text="@{String.format(Locale.ROOT, @string/generic_int,model.stargazersCount)}"
-                        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small" />
+                        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                        tools:text="0" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/text_view_edit_issue_count"
@@ -113,18 +119,21 @@
                         android:drawableStart="@drawable/ic_issue"
                         android:drawablePadding="@dimen/padding_small"
                         android:text="@{String.format(Locale.ROOT, @string/generic_int,model.openIssuesCount)}"
-                        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small" />
+                        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+                        tools:text="0" />
                 </TableRow>
             </TableLayout>
+
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image_favorite"
                 android:layout_width="24sp"
                 android:layout_height="24sp"
-                android:visibility="gone"
+                android:src="@drawable/ic_favorite"
+                android:visibility="@{model.favorite? View.VISIBLE:View.GONE}"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/table_layout"
-                app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/black" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

@@ -1,7 +1,11 @@
 package com.batdemir.github.ui.home
 
+import android.Manifest
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
@@ -10,9 +14,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.batdemir.github.BuildConfig
 import com.batdemir.github.R
 import com.batdemir.github.data.entities.RepositoryModel
 import com.batdemir.github.databinding.FragmentHomeBinding
@@ -21,7 +27,13 @@ import com.batdemir.github.ui.MainActivity
 import com.batdemir.github.ui.adapter.RepositoryAdapter
 import com.batdemir.github.utils.Resource
 import com.batdemir.github.utils.hideKeyboard
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import javax.inject.Inject
+
 
 class HomeFragment : Fragment(), BaseFragmentActions {
     @Inject
@@ -30,6 +42,11 @@ class HomeFragment : Fragment(), BaseFragmentActions {
     private var binding: FragmentHomeBinding? = null
 
     private var repositoryAdapter: RepositoryAdapter? = null
+
+    private val permissions = listOf(
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE
+    )
 
     override fun onAttach(context: Context) {
         (requireActivity() as MainActivity).homeComponent?.inject(this)
@@ -69,7 +86,7 @@ class HomeFragment : Fragment(), BaseFragmentActions {
                         CURRENT_USER = ""
                         findNavController().navigate(
                             HomeFragmentDirections.actionHomeFragmentToDetailFragment(
-                                model.name!!,
+                                model.name,
                                 model
                             )
                         )
@@ -81,27 +98,67 @@ class HomeFragment : Fragment(), BaseFragmentActions {
 
     override fun setupData() {
         if (CURRENT_USER.isNotEmpty()) {
-            hideKeyboard()
-            viewModel.getRepoListByUser(CURRENT_USER)
-                .observe(viewLifecycleOwner, {
-                    when (it.status) {
-                        Resource.Status.SUCCESS -> {
-                            binding!!.progressBar.visibility = View.GONE
-                            if (it.data.isNullOrEmpty())
-                                return@observe
-                            it.data.let(repositoryAdapter!!::submitList)
+            Dexter
+                .withContext(requireContext())
+                .withPermissions(permissions)
+                .withListener(object : MultiplePermissionsListener {
+                    override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+                        if (report.areAllPermissionsGranted()) {
+                            hideKeyboard()
+                            viewModel.getRepoListByUser(CURRENT_USER)
+                                .observe(viewLifecycleOwner, {
+                                    when (it.status) {
+                                        Resource.Status.SUCCESS -> {
+                                            binding!!.progressBar.visibility = View.GONE
+                                            if (it.data.isNullOrEmpty())
+                                                return@observe
+                                            it.data.let(repositoryAdapter!!::submitList)
+                                        }
+                                        Resource.Status.ERROR -> {
+                                            binding!!.progressBar.visibility = View.GONE
+                                            Toast.makeText(
+                                                requireContext(),
+                                                it.message,
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                        Resource.Status.LOADING -> {
+                                            binding!!.progressBar.visibility = View.VISIBLE
+                                        }
+                                    }
+                                })
                         }
-                        Resource.Status.ERROR -> {
-                            binding!!.progressBar.visibility = View.GONE
-                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                        }
-                        Resource.Status.LOADING -> {
-                            binding!!.progressBar.visibility = View.VISIBLE
+                        if (report.isAnyPermissionPermanentlyDenied) {
+                            AlertDialog
+                                .Builder(requireContext())
+                                .setTitle(requireContext().getString(R.string.permissions_is_permanently_denied))
+                                .setMessage(requireContext().getString(R.string.in_the_window_that_opens_permissions_allow))
+                                .setPositiveButton(requireContext().getString(R.string.ok)) { _, _ ->
+                                    requireContext().startActivity(Intent().apply {
+                                        action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                                        data = Uri.fromParts(
+                                            "package",
+                                            BuildConfig.APPLICATION_ID,
+                                            requireContext().javaClass.simpleName
+                                        )
+                                    })
+                                }
+                                .show()
                         }
                     }
+
+                    override fun onPermissionRationaleShouldBeShown(
+                        permissions: List<PermissionRequest?>?,
+                        token: PermissionToken?
+                    ) {
+                        token!!.continuePermissionRequest()
+                    }
                 })
+                .check()
         }
     }
+
 
     override fun setupListener() {
         binding!!.inputLayoutUser.editText!!.addTextChangedListener(object : TextWatcher {
