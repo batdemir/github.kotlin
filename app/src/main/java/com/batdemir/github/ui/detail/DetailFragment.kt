@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
@@ -53,16 +54,28 @@ class DetailFragment : Fragment(), BaseFragmentActions {
             this.lifecycleOwner = viewLifecycleOwner
             this.viewModel = viewModel
         }
+        args.model!!.apply { viewModel.start(this) }
     }
 
     override fun setupData() {
-        args.model!!.let(binding!!::setModel)
+        viewModel.item.observe(viewLifecycleOwner, {
+            binding!!.model = it
+            binding!!.executePendingBindings()
+        })
     }
 
     override fun setupListener() {
         binding!!.rootFragmentDetail.setOnRefreshListener {
             setupData()
             binding!!.rootFragmentDetail.isRefreshing = false
+        }
+        binding!!.buttonStar.setOnClickListener {
+            val result = viewModel.updateModel()
+            Toast.makeText(
+                requireContext(),
+                requireContext().getString(if (result) R.string.stared_repo else R.string.un_stared_repo),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }

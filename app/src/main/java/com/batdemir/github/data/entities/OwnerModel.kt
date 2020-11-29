@@ -2,18 +2,23 @@ package com.batdemir.github.data.entities
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "Owner")
 data class OwnerModel(
-    val id: Long? = null,
-    val login: String? = null,
+    @PrimaryKey
+    @ColumnInfo(name = "ownerId") var id: Long = 0,
+    var login: String? = null,
     @SerializedName("avatar_url")
-    val avatarUrl: String? = null,
+    var avatarUrl: String? = null,
     @SerializedName("html_url")
-    val htmlUrl: String? = null
+    @ColumnInfo(name = "ownerHtmlUrl") var htmlUrl: String? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readValue(Long::class.java.classLoader) as? Long,
+        parcel.readLong(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
@@ -21,7 +26,7 @@ data class OwnerModel(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeValue(id)
+        parcel.writeLong(id)
         parcel.writeString(login)
         parcel.writeString(avatarUrl)
         parcel.writeString(htmlUrl)
@@ -40,4 +45,5 @@ data class OwnerModel(
             return arrayOfNulls(size)
         }
     }
+
 }

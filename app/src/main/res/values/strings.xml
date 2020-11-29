@@ -3,6 +3,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_detail">Detail</string>
+    <string name="title_favorite">Favorite</string>
 
     <string name="generic_int">%d</string>
     <string name="generic_string">%s</string>
@@ -18,4 +19,10 @@
     <string name="created_at">Created At: %s</string>
     <string name="updated_at">Updated At: %s</string>
     <string name="pushed_at">Pushed At: %s</string>
+    <string name="star">Star Repo</string>
+    <string name="permissions_is_permanently_denied">Permissions is permanently denied.</string>
+    <string name="in_the_window_that_opens_permissions_allow">In the window that opens permissions allow.</string>
+
+    <string name="stared_repo">Stared Repo</string>
+    <string name="un_stared_repo">Unstared Repo</string>
 </resources>

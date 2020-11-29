@@ -32,6 +32,7 @@ ext.versions = [
         recyclerVersion      : '1.2.0-alpha06',
         appCompatVersion     : '1.2.0',
         legacyVersion        : '1.0.0',
+        roomVersion          : '2.2.5',
 
         // startup
         startupVersion       : '1.0.0',

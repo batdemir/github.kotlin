@@ -25,10 +25,6 @@ Aapp/src/main/java/com/batdemir/github/utils/DataAccessStrategy.kt,8/7/87169dbb
 Napp/src/main/java/com/batdemir/github/data/storage/SharedPreferencesStorage.kt,1/8/18fe2ab1212c5b3f31809e46b3ff5fb7b483b06a
 g
 7app/src/main/java/com/batdemir/github/utils/Resource.kt,c/5/c57a431e07a9c4046ec44f2489658bc51637223f
-u
-Eapp/src/main/java/com/batdemir/github/utils/ZoomOutPageTransformer.kt,3/1/314c8017ea9552b9062865c5d5528823929fdc6f
-p
-@app/src/main/java/com/batdemir/github/utils/ActivityExtension.kt,c/1/c1993b27bbfbb440089de39ea6676e3a8723a969
 j
 :app/src/main/java/com/batdemir/github/app/MyApplication.kt,e/a/ea9019b83dca0161ba93a656bc3bba86ae8ef5b8
 s
@@ -41,14 +37,8 @@ s
 Capp/src/main/java/com/batdemir/github/di/module/RepositoryModule.kt,b/1/b13ef0f10cc25b160060a80c58dfbffd5785b99c
 p
 @app/src/main/java/com/batdemir/github/di/module/StorageModule.kt,d/9/d91f37bf643edc129e060df4ac23e30f3b1fd618
-n
->app/src/main/java/com/batdemir/github/di/module/LocalModule.kt,a/0/a0bee22020530ecf52348d0d48531e60c50e2551
 s
 Capp/src/main/java/com/batdemir/github/data/entities/LicenseModel.kt,4/f/4f4449374121089a0e64d9896592c7a87625301d
-o
-?app/src/main/java/com/batdemir/github/data/local/AppDatabase.kt,8/1/81de9af3c6baee3853144c058a077c7c1a4a4043
-m
-=app/src/main/java/com/batdemir/github/data/local/GithubDao.kt,c/8/c84c661db7f034e040f78145000738384feea4e7
 z
 Japp/src/main/java/com/batdemir/github/di/component/ApplicationComponent.kt,c/8/c88e3620c7e9b1499d1d63acd132770d65318a02
 h
@@ -73,7 +63,7 @@ n
 >app/src/main/java/com/batdemir/github/utils/TimeExpressions.kt,2/e/2e2f4fd5d6fb75bfc4cdcd68a1a7d1dda188dda8
 u
 Eapp/src/main/java/com/batdemir/github/ui/adapter/RepositoryAdapter.kt,a/0/a0cb50e01e6ae826ae45625bfb98c6fa19cefb37
-s
-Capp/src/main/java/com/batdemir/github/data/entities/StartedModel.kt,9/a/9a8d19b388bb07c737a701d5d99e577eff76c097
 v
 Fapp/src/main/java/com/batdemir/github/data/entities/RepositoryModel.kt,4/1/41553cf0d8b8614fd02ec6baf4813dceac6d004e
+p
+@app/src/main/java/com/batdemir/github/utils/KeyboardExtension.kt,c/a/caa05719f21b3c0a28cb5c70ea0e3d94a1f3889a
